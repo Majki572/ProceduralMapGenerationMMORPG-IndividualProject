@@ -65,6 +65,11 @@ public class MapCreator : MonoBehaviour
 
     private void generateMap()
     {
+        //for(int i = 0; i < 2; i++){
+        //    heightWaves[i].seed = UnityEngine.Random.Range(1,5000);
+        //    moistureWaves[i].seed = UnityEngine.Random.Range(1,5000);
+        //    heatWaves[i].seed = UnityEngine.Random.Range(1,5000);
+        //}
         // wysokosc
         heightMap = NoiseGenerator.GenerateNoiseMap(width, height, scale, heightWaves, offset);
         // wilgotnosc
@@ -103,21 +108,21 @@ public class MapCreator : MonoBehaviour
             }
         }
 
-        float curVal = 0.0f;
+        float tmpVal = 0.0f;
         BiomePreset biomeToReturn = null;
         foreach (BiomeTmpData biome in biomeTemp)
         {
             if (biomeToReturn == null)
             {   
                 biomeToReturn = biome.biome;
-                curVal = biome.GetDiffValue(height, moisture, heat);
+                tmpVal = biome.GetDiffValue(height, moisture, heat);
             }
             else
             {
-                if (biome.GetDiffValue(height, moisture, heat) < curVal)
+                if (biome.GetDiffValue(height, moisture, heat) < tmpVal)
                 {
                     biomeToReturn = biome.biome;
-                    curVal = biome.GetDiffValue(height, moisture, heat);
+                    tmpVal = biome.GetDiffValue(height, moisture, heat);
                 }
             }
         }

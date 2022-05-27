@@ -11,13 +11,8 @@ public class StaticObjectPreset : ScriptableObject
     public float minMoisture;
     public float minHeat;
 
-    public Sprite GetTileSprite()
+    public Sprite GetSprite()
     {
         return stObj[Random.Range(0, stObj.Length)];
-    }
-
-    public bool MatchCondition(float height, float moisture, float heat)
-    {
-        return height >= minHeight && moisture >= minMoisture && heat >= minHeat;
     }
 }

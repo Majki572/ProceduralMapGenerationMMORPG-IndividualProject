@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1cb39556ff79d49b0b67e4cc1d6eae, type: 3}
   m_Name: Mountain
   m_EditorClassIdentifier: 
-  tiles: []
+  stObj:
+  - {fileID: 9163872656599509061, guid: 4ea3f84c89d63544a9d2399a753ef26e, type: 3}
   minHeight: 0
   minMoisture: 0
   minHeat: 0

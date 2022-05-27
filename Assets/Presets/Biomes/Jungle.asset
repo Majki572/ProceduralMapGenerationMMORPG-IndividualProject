@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: Jungle
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 21300000, guid: 05fca76dfa417c34585b67f025ce6454, type: 3}
-  - {fileID: 21300000, guid: b88e54dc1887821479744cd831265234, type: 3}
-  - {fileID: 21300000, guid: f029dd5a4ad081a47953f709a80d7bbc, type: 3}
-  minHeight: 0.2
-  minMoisture: 0.5
-  minHeat: 0.55
-  biomeID: 3
+  - {fileID: 2658485123964470515, guid: ce0f0531071fc034a90065abc4bb1a66, type: 3}
+  minHeight: 0.28
+  minMoisture: 0.48
+  minHeat: 0.53
+  biomeID: 2

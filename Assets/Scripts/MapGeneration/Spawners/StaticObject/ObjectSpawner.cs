@@ -8,10 +8,15 @@ public class ObjectSpawner : MonoBehaviour
     private int chunkMaxX = 200;
     private int chunkMinY = 0;
     private int chunkMaxY = 200;
-    private int staticObjectCount = 200;
+    public int staticObjectCount = 400;
     
-    public Dictionary<int, StaticObjectPreset> trees;
-    public Dictionary<int, StaticObjectPreset> rocks;
+    public StaticObjectPreset[] trees;
+    public StaticObjectPreset[] rocks;
+    
+    private Dictionary<int, StaticObjectPreset> treesD;
+    private Dictionary<int, StaticObjectPreset> rocksD;
+
+    private Dictionary<string, Dictionary<int, StaticObjectPreset>> dictionaryHolder = new Dictionary<string, Dictionary<int, StaticObjectPreset>>();
     
     private GameObject objectPooler;
     private int[,] whatBiome;
@@ -28,6 +33,10 @@ public class ObjectSpawner : MonoBehaviour
 
     public void spawnStaticObjects(){
         whatBiome = GameObject.FindWithTag("BiomeDataObj").GetComponent<BiomeDataObj>().biomedMap;
+        treesD = copyTable(trees);
+        rocksD = copyTable(rocks);
+        dictionaryHolder.Add("Tree", treesD);
+        dictionaryHolder.Add("Rock", rocksD);
         spawnStaticObject("Tree");
         spawnStaticObject("Rock");
     }
@@ -36,20 +45,30 @@ public class ObjectSpawner : MonoBehaviour
         //bool canSpawn;
 
         for (int i = 0; i < staticObjectCount; ++i){
-            Vector3 pos = new Vector3(Random.Range(chunkMinX,chunkMaxX), Random.Range(chunkMinY,chunkMaxY), 0);
+            Vector3 pos = new Vector3((int)Random.Range(chunkMinX,chunkMaxX), (int)Random.Range(chunkMinY,chunkMaxY), 0);
             //canSpawn = PreventOverlap(pos);
             GameObject tree = objectPooler.GetComponent<ObjectPooler>().SpawnFromPool(name, pos, Quaternion.identity);
-
-            //tree.GetComponent<SpriteRenderer>().sprite = GetSprite(name, pos);
+            tree.GetComponent<SpriteRenderer>().sprite = GetSprite(name, pos);
         }
     }
 
     private bool PreventOverlap(Vector3 pos){
         return false;
     }
+    // From the list of dictionaries pick the one that has biome-classified object in it
+    // Choose texture of the wanted object considering biome
+    private Sprite GetSprite(string name, Vector3 pos){
+        Sprite sprite;
+        Dictionary<int, StaticObjectPreset> dict = dictionaryHolder[name];
+        sprite = dict[whatBiome[(int)pos[0],(int)pos[1]]].GetSprite();
+        return sprite;
+    }
 
-    private int GetSprite(string name, Vector3 pos){
-        Sprite sprite; // to return
-        return 0;
+    private Dictionary<int, StaticObjectPreset> copyTable(StaticObjectPreset[] src){
+        Dictionary<int, StaticObjectPreset> dst = new Dictionary<int, StaticObjectPreset>();
+        for(int i = 0; i < src.Length; i++){
+            dst.Add(i, src[i]);
+        }
+        return dst;
     }
 }

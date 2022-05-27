@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Mountains
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 21300000, guid: b67026756263add48aab94853997ec13, type: 3}
+  - {fileID: 6248687498699115698, guid: ce0f0531071fc034a90065abc4bb1a66, type: 3}
   minHeight: 0.5
   minMoisture: 0
   minHeat: 0
-  biomeID: 4
+  biomeID: 3

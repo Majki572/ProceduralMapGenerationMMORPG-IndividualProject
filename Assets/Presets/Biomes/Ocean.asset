@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: Ocean
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 21300000, guid: a0a7fb881218a92429bd9c2c8939be0e, type: 3}
-  - {fileID: 21300000, guid: c8500cf8e7ba09f4a9f7e0896651328d, type: 3}
-  - {fileID: 21300000, guid: 8a3aaa53d7f0945418483aaa89f5d911, type: 3}
+  - {fileID: -7439620078550526606, guid: ce0f0531071fc034a90065abc4bb1a66, type: 3}
   minHeight: 0
   minMoisture: 0
   minHeat: 0
-  biomeID: 5
+  biomeID: 4

@@ -158,6 +158,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d458f670d39c29947a7bccd613d891c5, type: 2}
   - {fileID: 11400000, guid: 3991f24122a444247a6d1b913881c843, type: 2}
   - {fileID: 11400000, guid: 27daa197622dd4c4ea9a7a1dced2a8f2, type: 2}
+  - {fileID: 11400000, guid: 3e9c24bbb3e777845805905601f6ad43, type: 2}
   tilePrefab: {fileID: 2287136853684133423, guid: 29fea693b0194a54ca6ac95d01300fb6, type: 3}
   width: 200
   height: 200
@@ -230,7 +231,7 @@ MonoBehaviour:
   pools:
   - tag: prefab
     prefab: {fileID: 2287136853684133423, guid: 29fea693b0194a54ca6ac95d01300fb6, type: 3}
-    size: 40000
+    size: 160000
   - tag: Tree
     prefab: {fileID: 2580071578642621903, guid: 329b1a519f09c114d95b9b3cd142ad68, type: 3}
     size: 15000
@@ -434,8 +435,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3894a6f7f989fb4391f85f65a57d118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treeSprite: {fileID: 21300000, guid: 2292a120560df074793622a9e57c050f, type: 3}
-  rockSprite: {fileID: 21300000, guid: 8902456998e920c478d78dce1daaa1af, type: 3}
+  staticObjectCount: 200
+  trees:
+  - {fileID: 11400000, guid: 82f1121e2ec904a4cbf22c813427c706, type: 2}
+  - {fileID: 11400000, guid: c51a69dbe565d1e4b85f6414f42e8537, type: 2}
+  - {fileID: 11400000, guid: a3d582cc88d0b8240b206ac4e3f2c5b5, type: 2}
+  - {fileID: 11400000, guid: 360f0833db00df346816e64d6145e5d3, type: 2}
+  - {fileID: 11400000, guid: a70e310c794dba949b53f163691e6dd1, type: 2}
+  - {fileID: 11400000, guid: d302431c66cee1947aaa8c8f0010066e, type: 2}
+  rocks:
+  - {fileID: 11400000, guid: ca4843aac3325224a961e9cf4be7f28b, type: 2}
+  - {fileID: 11400000, guid: 172a91b808c70e74a8a833698c279dc7, type: 2}
+  - {fileID: 11400000, guid: 1860ab53f2ae28445b74c19cc1dabf39, type: 2}
+  - {fileID: 11400000, guid: 21a01881b41eaf14f9a8b66b8cafe7d0, type: 2}
+  - {fileID: 11400000, guid: c25506b400c76d6498d0cd6a7139540d, type: 2}
+  - {fileID: 11400000, guid: 59b22de8e51c8bf47908ab9d04caa53b, type: 2}
 --- !u!1 &1954505594
 GameObject:
   m_ObjectHideFlags: 0
