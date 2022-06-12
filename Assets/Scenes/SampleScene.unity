@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 25552842}
   - component: {fileID: 25552841}
+  - component: {fileID: 25552843}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: MapGenerator
@@ -160,6 +161,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27daa197622dd4c4ea9a7a1dced2a8f2, type: 2}
   - {fileID: 11400000, guid: 3e9c24bbb3e777845805905601f6ad43, type: 2}
   tilePrefab: {fileID: 2287136853684133423, guid: 29fea693b0194a54ca6ac95d01300fb6, type: 3}
+  riverMaximumSprite: {fileID: 5396742899211023878, guid: ce0f0531071fc034a90065abc4bb1a66, type: 3}
+  riverMinimumAndFlowSprite: {fileID: -7439620078550526606, guid: ce0f0531071fc034a90065abc4bb1a66, type: 3}
   width: 200
   height: 200
   scale: 0.4
@@ -199,6 +202,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &25552843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25552840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33cbd76c492bbbd4f9bfcaa38603015a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  riverSettings:
+    octaves: 3
+    startFreq: 0.01
+    persistance: 0.5
+  riverStartPosition: {x: 0, y: 0}
+  riverLength: 250
+  bold: 1
+  converganceOn: 1
 --- !u!1 &127216751
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +260,9 @@ MonoBehaviour:
     size: 15000
   - tag: Rock
     prefab: {fileID: 8925352663380926478, guid: 2d4371f4a83f13e4fb98cb075066d759, type: 3}
+    size: 10000
+  - tag: River
+    prefab: {fileID: 161982836370949799, guid: c04e28dcae8f0f64e92c2b9867c5723a, type: 3}
     size: 10000
 --- !u!4 &127216753
 Transform:
@@ -521,7 +547,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 15
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

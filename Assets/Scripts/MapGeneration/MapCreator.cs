@@ -7,10 +7,14 @@ public class MapCreator : MonoBehaviour
 {
     public BiomePreset[] biomes;
     public GameObject tilePrefab;
-    
+    public int[,] biomedMap;
+    public Sprite riverMaximumSprite;
+    public Sprite riverMinimumAndFlowSprite;
+
     private ObjectPooler objectPooler;
     private ObjectSpawner objectSpawner;
-    public int[,] biomedMap;
+    private List<Vector2Int> maximas;
+    private List<Vector2Int> minimas;
 
     //[Header("SpawnableObjects")]
     //int staticObjectCount = 100;
@@ -65,20 +69,18 @@ public class MapCreator : MonoBehaviour
 
     private void generateMap()
     {
-        //for(int i = 0; i < 2; i++){
-        //    heightWaves[i].seed = UnityEngine.Random.Range(1,5000);
-        //    moistureWaves[i].seed = UnityEngine.Random.Range(1,5000);
-        //    heatWaves[i].seed = UnityEngine.Random.Range(1,5000);
-        //}
-        // wysokosc
+        for(int i = 0; i < 2; i++){
+            heightWaves[i].seed = UnityEngine.Random.Range(1,5000);
+            moistureWaves[i].seed = UnityEngine.Random.Range(1,5000);
+            heatWaves[i].seed = UnityEngine.Random.Range(1,5000);
+        }
         heightMap = NoiseGenerator.GenerateNoiseMap(width, height, scale, heightWaves, offset);
-        // wilgotnosc
         moistureMap = NoiseGenerator.GenerateNoiseMap(width, height, scale, moistureWaves, offset);
-        // temperatura
         heatMap = NoiseGenerator.GenerateNoiseMap(width, height, scale, heatWaves, offset);
         putTiles();
+
         GameObject.FindWithTag("BiomeDataObj").GetComponent<BiomeDataObj>().biomedMap = biomedMap;
-        
+        putRivers(heightMap, biomedMap);
     }
 
     private void putTiles(){
@@ -129,5 +131,26 @@ public class MapCreator : MonoBehaviour
         if (biomeToReturn == null)
             biomeToReturn = biomes[0];
         return biomeToReturn;
+    }
+
+    private void putRivers(float[,] heightMap, int[,] biomedMap){
+        RiverGenerator rg = this.GetComponent<RiverGenerator>();
+        maximas = NoiseGenerator.FindLocalMaxima(heightMap, biomedMap);
+        minimas = NoiseGenerator.FindLocalMinimum(heightMap, biomedMap);
+        foreach(var pos in maximas){
+            rg.CreateRiver(pos, minimas);
+        }
+
+
+
+
+        //for(int i = 0; i < maximas.Count; i++){
+        //    GameObject tile = objectPooler.SpawnFromPool("River", new Vector3(maximas[i].x, maximas[i].y, 0), Quaternion.identity);
+        //    tile.GetComponent<SpriteRenderer>().sprite = riverMaximumSprite;
+        //}
+        for(int i = 0; i < minimas.Count; i++){
+            GameObject tile = objectPooler.SpawnFromPool("River", new Vector3(minimas[i].x, minimas[i].y, 0), Quaternion.identity);
+            tile.GetComponent<SpriteRenderer>().sprite = riverMaximumSprite;
+        }
     }
 }
