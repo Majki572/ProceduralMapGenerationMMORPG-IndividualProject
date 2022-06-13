@@ -221,7 +221,6 @@ MonoBehaviour:
   riverStartPosition: {x: 0, y: 0}
   riverLength: 250
   bold: 1
-  converganceOn: 1
 --- !u!1 &127216751
 GameObject:
   m_ObjectHideFlags: 0

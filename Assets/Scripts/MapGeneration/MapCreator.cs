@@ -140,17 +140,5 @@ public class MapCreator : MonoBehaviour
         foreach(var pos in maximas){
             rg.CreateRiver(pos, minimas);
         }
-
-
-
-
-        //for(int i = 0; i < maximas.Count; i++){
-        //    GameObject tile = objectPooler.SpawnFromPool("River", new Vector3(maximas[i].x, maximas[i].y, 0), Quaternion.identity);
-        //    tile.GetComponent<SpriteRenderer>().sprite = riverMaximumSprite;
-        //}
-        for(int i = 0; i < minimas.Count; i++){
-            GameObject tile = objectPooler.SpawnFromPool("River", new Vector3(minimas[i].x, minimas[i].y, 0), Quaternion.identity);
-            tile.GetComponent<SpriteRenderer>().sprite = riverMaximumSprite;
-        }
     }
 }

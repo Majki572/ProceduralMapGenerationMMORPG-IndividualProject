@@ -10,7 +10,7 @@ public class RiverGenerator : MonoBehaviour
     public Vector2 riverStartPosition;
     public int riverLength = 50;
     public bool bold = true;
-    public bool converganceOn = true;
+    //public bool endPointOn = true;
 
     private ObjectPooler objectPooler;
 
@@ -18,21 +18,16 @@ public class RiverGenerator : MonoBehaviour
         objectPooler = GameObject.FindWithTag("ObjPooler").GetComponent<ObjectPooler>();
         riverSettings = new NoiseWormsSettings();
         PerlinWorms worm;
-        if (converganceOn){
-            var closestWaterPos = minimas.OrderBy(pos => Vector2.Distance(pos, startPosition)).First();
-            worm = new PerlinWorms(riverSettings, startPosition, closestWaterPos);
-        } else {
-            worm = new PerlinWorms(riverSettings, startPosition);
-        }
+        var closestWaterPos = minimas.OrderBy(pos => Vector2.Distance(pos, startPosition)).First();
+        worm = new PerlinWorms(riverSettings, startPosition, closestWaterPos);
         List<Vector2> position = worm.MoveLength(riverLength);
-        StartCoroutine(PlaceRiverTile(position));
+        putRivers(position);
     }
 
-    IEnumerator PlaceRiverTile(List<Vector2> positons){
+    private void putRivers(List<Vector2> positons){
         var mapGenerator = GameObject.FindWithTag("MapGenerator").GetComponent<MapCreator>();
         int[,] biomedMap = GameObject.FindWithTag("BiomeDataObj").GetComponent<BiomeDataObj>().biomedMap;
         foreach (Vector2 pos in positons){
-            //var tilePos = mapGenerator.mapRenderer.GetCellposition(pos);
             int sizeX = mapGenerator.width;
             int sizeY = mapGenerator.height;
             if (pos.x < 0 || pos.x >= sizeX || pos.y < 0 || pos.y >= sizeY)
@@ -49,8 +44,6 @@ public class RiverGenerator : MonoBehaviour
                 tileLEFT.GetComponent<SpriteRenderer>().sprite = mapGenerator.riverMinimumAndFlowSprite;
                 tileRIGHT.GetComponent<SpriteRenderer>().sprite = mapGenerator.riverMinimumAndFlowSprite;
             }
-            yield return new WaitForSeconds(0.1f);
         }
-        yield return null;
     }
 }

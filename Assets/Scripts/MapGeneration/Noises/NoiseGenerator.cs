@@ -7,25 +7,20 @@ using System.Linq;
 public class NoiseGenerator : MonoBehaviour
 {
     // scale - to zoom in or out from the noisemap to cut out specified widthXheight rectangle
-    public static float[,] GenerateNoiseMap(int width, int height, float scale, Wave[] waves, Vector2 offset)
-    {
+    public static float[,] GenerateNoiseMap(int width, int height, float scale, Wave[] waves, Vector2 offset){
         float[,] noiseMap = new float[width, height];
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                float samplePosX = (float)x * scale + offset.x;
-                float samplePosY = (float)y * scale + offset.y;
-                float normalization = 0.0f;
+        for (int x = 0; x < width; x++){
+            for (int y = 0; y < height; y++){
+                float newX = (float)x * scale + offset.x;
+                float newY = (float)y * scale + offset.y;
+                float normalize = 0.0f;
 
-                foreach (Wave wave in waves)
-                {
-                    noiseMap[x, y] += wave.amplitude * Mathf.PerlinNoise(samplePosX * wave.frequency + 
-                        wave.seed, samplePosY * wave.frequency + wave.seed);
-                    normalization += wave.amplitude;
+                foreach (Wave wave in waves){
+                    noiseMap[x, y] += wave.amplitude * Mathf.PerlinNoise(newX * wave.frequency + 
+                        wave.seed, newY * wave.frequency + wave.seed);
+                    normalize += wave.amplitude;
                 }
-
-                noiseMap[x, y] /= normalization;
+                noiseMap[x, y] /= normalize;
             }
         }
         return noiseMap;
@@ -44,7 +39,7 @@ public class NoiseGenerator : MonoBehaviour
         }
         
         for(int i = 0; i < maximas.Count; i++){
-            if(biomedMap[maximas[i].x, maximas[i].y] == 3 /*|| biomedMap[maximas[i].x, maximas[i].y] == 2 || biomedMap[maximas[i].x, maximas[i].y] == 5*/){ // ID of a mountains biome is 3
+            if(biomedMap[maximas[i].x, maximas[i].y] == 3 || biomedMap[maximas[i].x, maximas[i].y] == 1/* || biomedMap[maximas[i].x, maximas[i].y] == 5*/){ // ID of a mountains biome is 3
                 correctedMaximas.Add(maximas[i]);
             }
         }

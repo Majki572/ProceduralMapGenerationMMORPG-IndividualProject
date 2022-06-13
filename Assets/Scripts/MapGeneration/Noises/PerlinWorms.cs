@@ -10,7 +10,7 @@ public class PerlinWorms{
     private Vector2 endPoint;
     private NoiseWormsSettings noiseWormsSettings;
     public bool moveToEndPoint = false;
-    [Range(0.5f, 0.9f)]
+    [Range(0.3f, 0.9f)]
     public float weight = 0.6f;
 
     public PerlinWorms(NoiseWormsSettings noiseWormsSettings, Vector2 startPos, Vector2 endPoint){
@@ -19,14 +19,6 @@ public class PerlinWorms{
         this.currentPos = startPos;
         this.endPoint = endPoint;
         this.moveToEndPoint = true;
-    }
-
-    public PerlinWorms(NoiseWormsSettings noiseWormsSettings, Vector2 startPos)
-    {
-        currentDirection = Random.insideUnitCircle.normalized;
-        this.noiseWormsSettings = noiseWormsSettings;
-        this.currentPos = startPos;
-        this.moveToEndPoint = false;
     }
 
     private Vector2 Move(){
@@ -45,14 +37,14 @@ public class PerlinWorms{
 
     private Vector2 GetDirection(){
         float noise = NoiseGenerator.SumNoise(currentPos.x, currentPos.y, noiseWormsSettings);
-        float angle = NoiseGenerator.RangeMap(noise, 0, 1, -60, 60); // to what extent does the worm move / rotation / for meandering
+        float angle = NoiseGenerator.RangeMap(noise, 0, 1, -80, 80); // to what extent does the worm move / rotation / for meandering
         currentDirection = (Quaternion.AngleAxis(angle, Vector3.forward) * currentDirection).normalized;
         return currentDirection;
     }
 
     public List<Vector2> MoveLength(int length){
         List<Vector2> list = new List<Vector2>();
-        foreach(var item in Enumerable.Range(0, length)){
+        for(int i = 0; i < length; i++){
             if(moveToEndPoint){
                 var result = MoveTowardEndPoint();
                 list.Add(result);
